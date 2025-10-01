@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_star_wars_project/data/clients/remote_client.dart';
@@ -7,24 +6,14 @@ import 'package:flutter_star_wars_project/data/json_parser.dart';
 import 'package:flutter_star_wars_project/models/FilmsResponse.dart';
 import 'package:http/http.dart' as http;
 
-void main() async {
-  final remoteClient = RemoteClientBuilder()
+class MoviesRepository {
+  final RemoteClient _remoteClient;
+
+  MoviesRepository.initialise() : _remoteClient = RemoteClientBuilder()
       .setBaseUrl(Constants.baseUrl)
       .setPath(Constants.filmsPath)
       .addQueryParam("format", "json")
       .build();
-
-  final movieRepo = MoviesRepository(client: remoteClient);
-
-  final result = await movieRepo.getMovies();
-
-  print("Films reult = ${result?.films.join(", ")}");
-}
-
-class MoviesRepository {
-  final RemoteClient _remoteClient;
-
-  MoviesRepository({required RemoteClient client}) : _remoteClient = client;
 
   Future<FilmResponse?> getMovies() async {
     try {
