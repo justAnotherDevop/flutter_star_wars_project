@@ -1,0 +1,58 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_star_wars_project/data/clients/remote_client.dart';
+import 'package:flutter_star_wars_project/data/constants.dart';
+import 'package:flutter_star_wars_project/data/json_parser.dart';
+import 'package:flutter_star_wars_project/models/FilmsResponse.dart';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  final remoteClient = RemoteClientBuilder()
+      .setBaseUrl(Constants.baseUrl)
+      .setPath(Constants.filmsPath)
+      .addQueryParam("format", "json")
+      .build();
+
+  final movieRepo = MoviesRepository(client: remoteClient);
+
+  final result = await movieRepo.getMovies();
+
+  print("Films reult = ${result?.films.join(", ")}");
+}
+
+class MoviesRepository {
+  final RemoteClient _remoteClient;
+
+  MoviesRepository({required RemoteClient client}) : _remoteClient = client;
+
+  Future<FilmResponse?> getMovies() async {
+    try {
+      final response = await _remoteClient.client?.get(
+        Uri.parse(
+          _remoteClient.getFullUrl(),
+        ).replace(queryParameters: _remoteClient.queryParams),
+      );
+      if (response != null) {
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          final result = JsonParser.parse<FilmResponse, Map<String, dynamic>>(
+            response.body,
+            (json) => FilmResponse.fromJson(json as Map<String, dynamic>),
+          );
+          return result;
+        } else {
+          throw http.ClientException(
+            'API Error: ${response.statusCode} - ${response.reasonPhrase}',
+            response.request?.url,
+          );
+        }
+      }
+    } catch (exception, trace) {
+      if (kDebugMode) {
+        print("Network Parsing Error Get Movies: $exception, $trace");
+      }
+    }
+    _remoteClient.close();
+    return null;
+  }
+}
