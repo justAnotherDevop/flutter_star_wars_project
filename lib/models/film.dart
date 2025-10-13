@@ -11,9 +11,6 @@ class Film {
   final List<String> starships;
   final List<String> vehicles;
   final List<String> species;
-  final String created;
-  final String edited;
-  final String url;
 
   Film({
     required this.title,
@@ -27,9 +24,6 @@ class Film {
     required this.starships,
     required this.vehicles,
     required this.species,
-    required this.created,
-    required this.edited,
-    required this.url,
   });
 
   factory Film.fromJson(Map<String, dynamic> json) {
@@ -45,9 +39,6 @@ class Film {
       starships: List<String>.from(json['starships'] as List<dynamic>),
       vehicles: List<String>.from(json['vehicles'] as List<dynamic>),
       species: List<String>.from(json['species'] as List<dynamic>),
-      created: json['created'] as String,
-      edited: json['edited'] as String,
-      url: json['url'] as String,
     );
   }
 
@@ -64,9 +55,6 @@ class Film {
       'starships': starships,
       'vehicles': vehicles,
       'species': species,
-      'created': created,
-      'edited': edited,
-      'url': url,
     };
   }
 

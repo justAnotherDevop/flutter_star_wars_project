@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_star_wars_project/data/repository/movies_repository.dart';
-import 'package:flutter_star_wars_project/models/FilmsResponse.dart';
+import 'package:flutter_star_wars_project/models/film.dart';
 
 class MoviesProvider with ChangeNotifier {
 
