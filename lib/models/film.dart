@@ -1,11 +1,13 @@
 
+import 'package:flutter_star_wars_project/domain/models/movie.dart';
+
 class Film {
   final String title;
   final int episodeId;
   final String openingCrawl;
   final String director;
   final String producer;
-  final String releaseDate; // Could be DateTime if you parse it
+  final String releaseDate; 
   final List<String> characters;
   final List<String> planets;
   final List<String> starships;
@@ -39,6 +41,22 @@ class Film {
       starships: List<String>.from(json['starships'] as List<dynamic>),
       vehicles: List<String>.from(json['vehicles'] as List<dynamic>),
       species: List<String>.from(json['species'] as List<dynamic>),
+    );
+  }
+
+  Movie toDomain() {
+    return Movie(
+      title: title,
+      episodeId: episodeId,
+      openingCrawl: openingCrawl,
+      director: director,
+      producer: producer,
+      releaseDate: releaseDate,
+      characters: characters,
+      planets: planets,
+      starships: starships,
+      vehicles: vehicles,
+      species: species,
     );
   }
 
@@ -89,6 +107,10 @@ class FilmResponse {
       previous: json['previous'] as String?,
       films: filmResults,
     );
+  }
+
+  List<Movie> toDomain() {
+    return films.map((film) => film.toDomain()).toList();
   }
 
   Map<String, dynamic> toJson() {

@@ -3,19 +3,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_star_wars_project/data/clients/remote_client.dart';
 import 'package:flutter_star_wars_project/data/constants.dart';
 import 'package:flutter_star_wars_project/data/json_parser.dart';
+import 'package:flutter_star_wars_project/domain/repository/movies_repository.dart';
 import 'package:flutter_star_wars_project/models/film.dart';
 import 'package:http/http.dart' as http;
 
-class MoviesRepository {
+import '../../domain/models/movie.dart';
+
+class MoviesRepositoryImpl implements MoviesRepository {
   final RemoteClient _remoteClient;
 
-  MoviesRepository.initialise() : _remoteClient = RemoteClientBuilder()
+  MoviesRepositoryImpl.initialise() : _remoteClient = RemoteClientBuilder()
       .setBaseUrl(Constants.baseUrl)
       .setPath(Constants.filmsPath)
       .addQueryParam("format", "json")
       .build();
 
-  Future<FilmResponse?> getMovies() async {
+  @override
+  Future<List<Movie>> getMovies() async {
     try {
       final response = await _remoteClient.client?.get(
         Uri.parse(
@@ -28,7 +32,7 @@ class MoviesRepository {
             response.body,
             (json) => FilmResponse.fromJson(json as Map<String, dynamic>),
           );
-          return result;
+          return result.toDomain();
         } else {
           throw http.ClientException(
             'API Error: ${response.statusCode} - ${response.reasonPhrase}',
@@ -41,7 +45,6 @@ class MoviesRepository {
         print("Network Parsing Error Get Movies: $exception, $trace");
       }
     }
-    _remoteClient.close();
-    return null;
+    return [];
   }
 }
