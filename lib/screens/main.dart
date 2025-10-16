@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_star_wars_project/domain/models/movie.dart';
+import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_star_wars_project/providers/movies_cubit.dart';
 import 'package:flutter_star_wars_project/screens/movie_details.dart';
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class MovieCard extends StatelessWidget {
   const MovieCard({super.key, required this.movie});
 
-  final Movie movie;
+  final MovieDomain movie;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 
-import 'package:flutter_star_wars_project/domain/models/movie.dart';
+import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
 
 class Film {
   final String title;
@@ -44,8 +44,8 @@ class Film {
     );
   }
 
-  Movie toDomain() {
-    return Movie(
+  MovieDomain toDomain() {
+    return MovieDomain(
       title: title,
       episodeId: episodeId,
       openingCrawl: openingCrawl,
@@ -109,7 +109,7 @@ class FilmResponse {
     );
   }
 
-  List<Movie> toDomain() {
+  List<MovieDomain> toDomain() {
     return films.map((film) => film.toDomain()).toList();
   }
 

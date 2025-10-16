@@ -7,7 +7,7 @@ import 'package:flutter_star_wars_project/domain/repository/movies_repository.da
 import 'package:flutter_star_wars_project/models/film.dart';
 import 'package:http/http.dart' as http;
 
-import '../../domain/models/movie.dart';
+import '../../domain/models/movie_domain.dart';
 
 class MoviesRepositoryImpl implements MoviesRepository {
   final RemoteClient _remoteClient;
@@ -19,7 +19,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
       .build();
 
   @override
-  Future<List<Movie>> getMovies() async {
+  Future<List<MovieDomain>> getMovies() async {
     try {
       final response = await _remoteClient.client?.get(
         Uri.parse(

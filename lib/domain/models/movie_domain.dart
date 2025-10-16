@@ -1,4 +1,4 @@
-class Movie {
+class MovieDomain {
   final String title;
   final int episodeId;
   final String openingCrawl;
@@ -11,7 +11,7 @@ class Movie {
   final List<String> vehicles;
   final List<String> species;
 
-  Movie({
+  MovieDomain({
     required this.title,
     required this.episodeId,
     required this.openingCrawl,

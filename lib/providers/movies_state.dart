@@ -8,11 +8,11 @@ enum Status {
 }
 
 class MoviesState extends Equatable {
-  const MoviesState({required this.status, this.movies = const <Movie>[
+  const MoviesState({required this.status, this.movies = const <MovieDomain>[
   ], this.errorMessage = ""});
 
   final Status status;
-  final List<Movie> movies;
+  final List<MovieDomain> movies;
   final String errorMessage;
 
   factory MoviesState.initial() => MoviesState(status: Status.initial);
@@ -22,7 +22,7 @@ class MoviesState extends Equatable {
 
   MoviesState copyWith({
     required Status status,
-    List<Movie>? movies,
+    List<MovieDomain>? movies,
     String? errorMessage,
   }) {
     return MoviesState(

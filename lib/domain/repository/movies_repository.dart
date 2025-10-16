@@ -1,6 +1,6 @@
 
-import '../models/movie.dart';
+import '../models/movie_domain.dart';
 
 abstract class MoviesRepository {
-  Future<List<Movie>> getMovies();
+  Future<List<MovieDomain>> getMovies();
 }
