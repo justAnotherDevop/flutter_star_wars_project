@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_star_wars_project/providers/movies_cubit.dart';
+import 'package:flutter_star_wars_project/presentation/bloc/movies_cubit.dart';
 import 'package:flutter_star_wars_project/screens/movie_details.dart';
+
+import 'movie_details.dart';
 
 void main() {
   runApp(

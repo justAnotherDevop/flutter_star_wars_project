@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_star_wars_project/domain/get_movies_use_case.dart';
 
-import '../domain/models/movie_domain.dart';
+import '../../domain/models/movie_domain.dart';
 
 part 'movies_state.dart';
 

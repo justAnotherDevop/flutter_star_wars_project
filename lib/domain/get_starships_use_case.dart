@@ -3,21 +3,21 @@ import 'package:flutter_star_wars_project/data/repository/movie_details_reposito
 import 'package:flutter_star_wars_project/domain/base_async_use_case.dart';
 import 'package:flutter_star_wars_project/domain/repository/movie_details_repository_impl.dart';
 
-import 'models/character_domain.dart';
+import 'models/starship_domain.dart';
 
-class GetCharacterUseCase extends BaseAsyncUseCase<List<CharacterDomain?>, List<String>> {
+class GetStarshipsUseCase extends BaseAsyncUseCase<List<StarshipDomain?>, List<String>> {
   final MovieDetailsRepository _movieDetailsRepository = MovieDetailsRepositoryImpl();
   @override
-  Future<List<CharacterDomain?>> execute(List<String> urls) {
-    final List<Future<CharacterDomain?>> parallelCalls = [];
+  Future<List<StarshipDomain?>> execute(List<String> urls) {
+    final List<Future<StarshipDomain?>> parallelCalls = [];
     for (var url in urls) {
-      parallelCalls.add(_movieDetailsRepository.getCharacter(url));
+      parallelCalls.add(_movieDetailsRepository.getStarship(url));
     }
     try {
       return Future.wait(parallelCalls);
     } catch (exception, trace) {
       if (kDebugMode) {
-        print("Error while fetching characters asynchronously $exception, $trace");
+        print("Error while fetching starships asynchronously $exception, $trace");
       }
       rethrow;
     }
