@@ -6,12 +6,11 @@ import 'package:flutter_star_wars_project/domain/models/planet_domain.dart';
 import 'package:flutter_star_wars_project/domain/models/species_domain.dart';
 import 'package:flutter_star_wars_project/domain/models/starship_domain.dart';
 import 'package:flutter_star_wars_project/domain/models/vehicle_domain.dart';
-
-import '../../domain/get_characters_use_case.dart';
-import '../../domain/get_planets_use_case.dart';
-import '../../domain/get_species_use_case.dart';
-import '../../domain/get_starships_use_case.dart';
-import '../../domain/get_vehicles_use_case.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_characters_use_case.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_planets_use_case.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_species_use_case.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_starships_use_case.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_vehicles_use_case.dart';
 
 part 'movie_details_state.dart';
 

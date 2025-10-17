@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_star_wars_project/domain/get_movies_use_case.dart';
-
-import '../../domain/models/movie_domain.dart';
+import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
+import 'package:flutter_star_wars_project/domain/usecase/get_movies_use_case.dart';
 
 part 'movies_state.dart';
 

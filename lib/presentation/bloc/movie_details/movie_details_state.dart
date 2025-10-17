@@ -79,8 +79,6 @@ class MovieDetailsState extends Equatable {
   final String movieTitle;
   final String errorMessage;
 
-
-
   factory MovieDetailsState.initial() {
     return MovieDetailsState(status: Status.initial);
   }

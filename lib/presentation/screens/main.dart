@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_star_wars_project/presentation/bloc/movie_details_cubit.dart';
-import 'package:flutter_star_wars_project/presentation/bloc/movies_cubit.dart';
-import 'movie_details.dart';
+import 'package:flutter_star_wars_project/presentation/bloc/movie_details/movie_details_cubit.dart';
+import 'package:flutter_star_wars_project/presentation/bloc/movies/movies_cubit.dart';
+import 'package:flutter_star_wars_project/presentation/widgets/movie_card.dart';
 
 void main() {
   runApp(
@@ -89,64 +88,4 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MovieCard extends StatelessWidget {
-  const MovieCard({super.key, required this.movie});
 
-  final MovieDomain movie;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      child: InkWell(
-        onTap: () => {
-          context.read<MovieDetailsCubit>()
-            ..setMovieTitle(movie.title)
-            ..updateUrlEndpoints(
-            charactersEndpoints: movie.characters,
-            planetsEndpoints: movie.planets,
-            starshipsEndpoints: movie.starships,
-            vehiclesEndpoints: movie.vehicles,
-            speciesEndpoints: movie.species,
-          ),
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MovieDetails()),
-          ),
-        },
-        child: Container(
-          padding: EdgeInsetsGeometry.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey.withAlpha(15),
-                    child: Text(movie.director[0]),
-                  ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    movie.title,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                  Icon(Icons.navigate_next),
-                ],
-              ),
-              Text(
-                movie.openingCrawl,
-                style: Theme.of(context).textTheme.labelSmall,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

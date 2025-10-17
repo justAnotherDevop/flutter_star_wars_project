@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_star_wars_project/data/repository/movie_details_repository.dart';
-import 'package:flutter_star_wars_project/domain/base_async_use_case.dart';
 import 'package:flutter_star_wars_project/domain/models/vehicle_domain.dart';
 import 'package:flutter_star_wars_project/domain/repository/movie_details_repository_impl.dart';
+
+import 'base_async_use_case.dart';
 
 
 class GetVehiclesUseCase extends BaseAsyncUseCase<List<VehicleDomain?>, List<String>> {
