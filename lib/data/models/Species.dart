@@ -1,7 +1,7 @@
 
 import 'package:flutter_star_wars_project/domain/models/species_domain.dart' as domain;
 
-import '../domain/models/species_domain.dart';
+import '../../domain/models/species_domain.dart';
 
 class Species {
   final String name;

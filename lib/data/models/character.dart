@@ -1,7 +1,7 @@
 
 import 'package:flutter_star_wars_project/domain/models/character_domain.dart' as domain;
 
-import '../domain/models/character_domain.dart';
+import '../../domain/models/character_domain.dart';
 
 class Character {
   final String name;

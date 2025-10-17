@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_star_wars_project/data/clients/remote_client.dart';
 import 'package:flutter_star_wars_project/data/constants.dart';
 import 'package:flutter_star_wars_project/data/json_parser.dart';
+import 'package:flutter_star_wars_project/data/models/film.dart';
 import 'package:flutter_star_wars_project/domain/repository/movies_repository.dart';
-import 'package:flutter_star_wars_project/models/film.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/models/movie_domain.dart';

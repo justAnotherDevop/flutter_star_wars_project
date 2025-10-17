@@ -1,12 +1,12 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_star_wars_project/data/clients/remote_client.dart';
+import 'package:flutter_star_wars_project/data/models/planet.dart';
 import 'package:flutter_star_wars_project/data/repository/movie_details_repository.dart';
-import 'package:flutter_star_wars_project/models/character.dart' as data;
-import 'package:flutter_star_wars_project/models/starship.dart' as data;
-import 'package:flutter_star_wars_project/models/vehicle.dart' as data;
-import 'package:flutter_star_wars_project/models/Species.dart' as data;
-import 'package:flutter_star_wars_project/models/planet.dart' as data;
+import 'package:flutter_star_wars_project/data/models/character.dart' as data;
+import 'package:flutter_star_wars_project/data/models/starship.dart' as data;
+import 'package:flutter_star_wars_project/data/models/vehicle.dart' as data;
+import 'package:flutter_star_wars_project/data/models/Species.dart' as data;
 import 'package:flutter_star_wars_project/domain/models/character_domain.dart' as domain;
 import 'package:flutter_star_wars_project/domain/models/starship_domain.dart' as domain;
 import 'package:flutter_star_wars_project/domain/models/vehicle_domain.dart' as domain;
@@ -59,9 +59,9 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
       final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          final result = JsonParser.parse<data.Planet, Map<String, dynamic>>(
+          final result = JsonParser.parse<Planet, Map<String, dynamic>>(
             response.body,
-            (json) => data.Planet.fromJson(json as Map<String, dynamic>),
+            (json) => Planet.fromJson(json as Map<String, dynamic>),
           );
           return result.toDomain();
         } else {

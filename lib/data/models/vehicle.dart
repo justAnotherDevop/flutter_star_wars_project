@@ -1,7 +1,7 @@
 
 import 'package:flutter_star_wars_project/domain/models/vehicle_domain.dart' as domain;
 
-import '../domain/models/vehicle_domain.dart';
+import '../../domain/models/vehicle_domain.dart';
 
 class Vehicle {
   final String name;

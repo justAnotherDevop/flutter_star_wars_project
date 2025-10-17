@@ -1,7 +1,7 @@
 
 import 'package:flutter_star_wars_project/domain/models/starship_domain.dart' as domain;
 
-import '../domain/models/starship_domain.dart';
+import '../../domain/models/starship_domain.dart';
 
 class Starship {
   final String name;

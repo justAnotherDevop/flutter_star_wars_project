@@ -1,7 +1,7 @@
 
 import 'package:flutter_star_wars_project/domain/models/planet_domain.dart' as domain;
+import 'package:flutter_star_wars_project/domain/models/planet_domain.dart';
 
-import '../domain/models/planet_domain.dart';
 
 class Planet {
   final String name;
