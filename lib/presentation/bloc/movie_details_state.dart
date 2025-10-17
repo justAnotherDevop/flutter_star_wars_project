@@ -59,6 +59,8 @@ final class SpeciesItem extends MovieDetailItem {
 class MovieDetailsState extends Equatable {
   const MovieDetailsState({
     required this.status,
+    this.movieTitle = "",
+    this.errorMessage = "",
     this.detailItems = const [],
     this.charactersEndpoints = const [],
     this.planetsEndpoints = const [],
@@ -74,6 +76,10 @@ class MovieDetailsState extends Equatable {
   final List<String> starshipsEndpoints;
   final List<String> vehiclesEndpoints;
   final List<String> speciesEndpoints;
+  final String movieTitle;
+  final String errorMessage;
+
+
 
   factory MovieDetailsState.initial() {
     return MovieDetailsState(status: Status.initial);
@@ -88,10 +94,14 @@ class MovieDetailsState extends Equatable {
     starshipsEndpoints,
     vehiclesEndpoints,
     speciesEndpoints,
+    movieTitle,
+    errorMessage,
   ];
 
   MovieDetailsState copyWith({
     required Status status,
+    String? movieTitle,
+    String? errorMessage,
     List<MovieDetailItem>? detailItems,
     List<String>? peopleEndpoints,
     List<String>? planetsEndpoints,
@@ -101,12 +111,14 @@ class MovieDetailsState extends Equatable {
   }) {
     return MovieDetailsState(
       status: status,
+      movieTitle: movieTitle ?? this.movieTitle,
       detailItems: detailItems ?? this.detailItems,
       charactersEndpoints: peopleEndpoints ?? this.charactersEndpoints,
       planetsEndpoints: planetsEndpoints ?? this.planetsEndpoints,
       starshipsEndpoints: starshipsEndpoints ?? this.starshipsEndpoints,
       vehiclesEndpoints: vehiclesEndpoints ?? this.vehiclesEndpoints,
       speciesEndpoints: speciesEndpoints ?? this.speciesEndpoints,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

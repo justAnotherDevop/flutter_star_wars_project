@@ -13,12 +13,12 @@ class MoviesCubit extends Cubit<MoviesState> {
 
   Future<void> loadMovies() async {
     try {
-      emit(state.copyWith(status: Status.loading));
+      emit(state.copyWith(status: MovieStatus.loading));
       final result = await _getMoviesUseCase.getMovies();
-      emit(state.copyWith(status: Status.success, movies: result));
+      emit(state.copyWith(status: MovieStatus.success, movies: result));
     } catch (exception, _) {
       emit(state.copyWith(
-          status: Status.failure, errorMessage: exception.toString()));
+          status: MovieStatus.failure, errorMessage: exception.toString()));
     }
   }
 }

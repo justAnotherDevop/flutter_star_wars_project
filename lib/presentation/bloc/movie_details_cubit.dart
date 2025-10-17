@@ -59,4 +59,27 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       }
     }
   }
+
+  setMovieTitle(String title) {
+    emit(state.copyWith(status: Status.initial, movieTitle: title));
+  }
+
+  updateUrlEndpoints({
+    required List<String> charactersEndpoints,
+    required List<String> planetsEndpoints,
+    required List<String> starshipsEndpoints,
+    required List<String> vehiclesEndpoints,
+    required List<String> speciesEndpoints,
+  }) {
+    emit(
+      state.copyWith(
+        status: Status.initial,
+        peopleEndpoints: charactersEndpoints,
+        planetsEndpoints: planetsEndpoints,
+        starshipsEndpoints: starshipsEndpoints,
+        vehiclesEndpoints: vehiclesEndpoints,
+        speciesEndpoints: speciesEndpoints,
+      ),
+    );
+  }
 }

@@ -1,6 +1,6 @@
 part of 'movies_cubit.dart';
 
-enum Status {
+enum MovieStatus {
   initial,
   loading,
   success,
@@ -11,17 +11,17 @@ class MoviesState extends Equatable {
   const MoviesState({required this.status, this.movies = const <MovieDomain>[
   ], this.errorMessage = ""});
 
-  final Status status;
+  final MovieStatus status;
   final List<MovieDomain> movies;
   final String errorMessage;
 
-  factory MoviesState.initial() => MoviesState(status: Status.initial);
+  factory MoviesState.initial() => MoviesState(status: MovieStatus.initial);
 
   @override
   List<Object> get props => [status, movies, errorMessage];
 
   MoviesState copyWith({
-    required Status status,
+    required MovieStatus status,
     List<MovieDomain>? movies,
     String? errorMessage,
   }) {

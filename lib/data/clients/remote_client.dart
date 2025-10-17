@@ -31,6 +31,14 @@ class RemoteClient {
 
   Map<String, dynamic>? get queryParams => _queryParametersMap;
 
+  Future<Response?> request() async {
+    return client?.get(
+      Uri.parse(
+        getFullUrl(),
+      ).replace(queryParameters: queryParams),
+    );
+  }
+
   void close() {
     client?.close();
     if (kDebugMode) {

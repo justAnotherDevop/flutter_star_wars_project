@@ -21,11 +21,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<List<MovieDomain>> getMovies() async {
     try {
-      final response = await _remoteClient.client?.get(
-        Uri.parse(
-          _remoteClient.getFullUrl(),
-        ).replace(queryParameters: _remoteClient.queryParams),
-      );
+      final response = await _remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<FilmResponse, Map<String, dynamic>>(

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_star_wars_project/domain/models/movie_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_star_wars_project/presentation/bloc/movie_details_cubit.dart';
 import 'package:flutter_star_wars_project/presentation/bloc/movies_cubit.dart';
-import 'package:flutter_star_wars_project/screens/movie_details.dart';
-
 import 'movie_details.dart';
 
 void main() {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<MoviesCubit>(
-          create: (context) => MoviesCubit(),
+        BlocProvider<MoviesCubit>(create: (context) => MoviesCubit()),
+        BlocProvider<MovieDetailsCubit>(
+          create: (context) => MovieDetailsCubit(),
         ),
       ],
       child: const MyApp(),
@@ -22,7 +22,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,8 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MoviesCubit, MoviesState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -62,13 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           body: Builder(
             builder: (_) {
-              switch(state.status) {
-                case Status.initial:
-                case Status.loading:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                case Status.success:
+              switch (state.status) {
+                case MovieStatus.initial:
+                case MovieStatus.loading:
+                  return const Center(child: CircularProgressIndicator());
+                case MovieStatus.success:
                   return RefreshIndicator(
                     onRefresh: () async {
                       context.read<MoviesCubit>().loadMovies();
@@ -82,12 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     ),
                   );
-                case Status.failure:
-                  return Center(
-                    child: Text(state.errorMessage),
-                  );
+                case MovieStatus.failure:
+                  return Center(child: Text(state.errorMessage));
               }
-            }
+            },
           ),
         );
       },
@@ -102,20 +96,20 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final movieDetailsProvider = Provider.of<MovieDetailsProvider>(context);
     return Card(
       elevation: 2,
       child: InkWell(
-        onTap: () =>
-        {
+        onTap: () => {
+          context.read<MovieDetailsCubit>()
+            ..setMovieTitle(movie.title)
+            ..updateUrlEndpoints(
+            charactersEndpoints: movie.characters,
+            planetsEndpoints: movie.planets,
+            starshipsEndpoints: movie.starships,
+            vehiclesEndpoints: movie.vehicles,
+            speciesEndpoints: movie.species,
+          ),
 
-          // movieDetailsProvider.updateMovieTitle(movie.title),
-          // movieDetailsProvider.updatePeopleEndpoints(
-          //     peopleEndpoints: movie.characters,
-          //     planetsEndpoints: movie.planets,
-          //     starshipsEndpoints: movie.starships,
-          //     vehicleEndpoints: movie.vehicles,
-          //     speciesEndpoints: movie.species),
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MovieDetails()),
@@ -136,11 +130,7 @@ class MovieCard extends StatelessWidget {
                   Text(
                     textAlign: TextAlign.center,
                     movie.title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 17,
                     ),
@@ -150,10 +140,7 @@ class MovieCard extends StatelessWidget {
               ),
               Text(
                 movie.openingCrawl,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .labelSmall,
+                style: Theme.of(context).textTheme.labelSmall,
                 textAlign: TextAlign.center,
               ),
             ],

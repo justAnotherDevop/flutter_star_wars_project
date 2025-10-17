@@ -24,11 +24,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
         .build();
 
     try {
-      final response = await remoteClient.client?.get(
-        Uri.parse(
-          remoteClient.getFullUrl(),
-        ).replace(queryParameters: remoteClient.queryParams),
-      );
+      final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<data.Character, Map<String, dynamic>>(
@@ -60,11 +56,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
         .build();
 
     try {
-      final response = await remoteClient.client?.get(
-        Uri.parse(
-          remoteClient.getFullUrl(),
-        ).replace(queryParameters: remoteClient.queryParams),
-      );
+      final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<data.Planet, Map<String, dynamic>>(
@@ -96,11 +88,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
         .build();
 
     try {
-      final response = await remoteClient.client?.get(
-        Uri.parse(
-          remoteClient.getFullUrl(),
-        ).replace(queryParameters: remoteClient.queryParams),
-      );
+      final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<data.Species, Map<String, dynamic>>(
@@ -132,11 +120,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
         .build();
 
     try {
-      final response = await remoteClient.client?.get(
-        Uri.parse(
-          remoteClient.getFullUrl(),
-        ).replace(queryParameters: remoteClient.queryParams),
-      );
+      final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<data.Starship, Map<String, dynamic>>(
@@ -168,11 +152,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
         .build();
 
     try {
-      final response = await remoteClient.client?.get(
-        Uri.parse(
-          remoteClient.getFullUrl(),
-        ).replace(queryParameters: remoteClient.queryParams),
-      );
+      final response = await remoteClient.request();
       if (response != null) {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final result = JsonParser.parse<data.Vehicle, Map<String, dynamic>>(
