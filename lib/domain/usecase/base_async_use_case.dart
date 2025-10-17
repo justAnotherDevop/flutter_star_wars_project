@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
 abstract class BaseAsyncUseCase<T, P> {
-  Future<T> execute(P args);
+
+  Future<Either<Exception, T>> execute(P params);
 }

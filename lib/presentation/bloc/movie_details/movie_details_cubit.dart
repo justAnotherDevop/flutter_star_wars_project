@@ -22,6 +22,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final getVehiclesUseCase = GetVehiclesUseCase();
   final getSpeciesUseCase = GetSpeciesUseCase();
   final getStarshipsUseCase = GetStarshipsUseCase();
+  List<CharacterDomain> _characters = [];
+  List<PlanetDomain> _planets = [];
+  List<VehicleDomain> _vehicles = [];
+  List<SpeciesDomain> _species = [];
+  List<StarshipDomain> _starships = [];
 
   Future<void> loadDetails() async {
     emit(state.copyWith(status: Status.loading));
@@ -29,24 +34,58 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       final characters = await getCharactersUseCase.execute(
         state.charactersEndpoints,
       );
+      characters.fold(
+        (error) => emit(state.copyWith(status: Status.error, errorMessage: error.toString())),
+        (results) {
+          _characters = results.nonNulls.toList();
+        },
+      );
+
       final planets = await getPlanetsUseCase.execute(state.planetsEndpoints);
+      planets.fold(
+            (error) => emit(state.copyWith(status: Status.error, errorMessage: error.toString())),
+            (results) {
+          _planets = results.nonNulls.toList();
+        },
+      );
+
       final vehicles = await getVehiclesUseCase.execute(
         state.vehiclesEndpoints,
       );
+      vehicles.fold(
+            (error) => emit(state.copyWith(status: Status.error, errorMessage: error.toString())),
+            (results) {
+          _vehicles = results.nonNulls.toList();
+        },
+      );
+
       final species = await getSpeciesUseCase.execute(state.speciesEndpoints);
+      species.fold(
+            (error) => emit(state.copyWith(status: Status.error, errorMessage: error.toString())),
+            (results) {
+          _species = results.nonNulls.toList();
+        },
+      );
+
       final starships = await getStarshipsUseCase.execute(
         state.starshipsEndpoints,
+      );
+      starships.fold(
+            (error) => emit(state.copyWith(status: Status.error, errorMessage: error.toString())),
+            (results) {
+          _starships = results.nonNulls.toList();
+        },
       );
 
       emit(
         state.copyWith(
           status: Status.success,
           detailItems: [
-            CharactersItem(characters: characters.nonNulls.toList()),
-            PlanetsItem(planets: planets.nonNulls.toList()),
-            VehiclesItem(vehicles: vehicles.nonNulls.toList()),
-            SpeciesItem(species: species.nonNulls.toList()),
-            StarshipsItem(starships: starships.nonNulls.toList()),
+            CharactersItem(characters: _characters),
+            PlanetsItem(planets: _planets),
+            VehiclesItem(vehicles: _vehicles),
+            SpeciesItem(species: _species),
+            StarshipsItem(starships: _starships),
           ],
         ),
       );
